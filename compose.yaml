@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  pdf2zh:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./fonts:/app/fonts
+      - ./translated:/app/translated
+    environment:
+      - OPENAI_API_KEY=sk-proj-01234567890123456789012345678901
+      - OPENAI_MODEL=gpt-4o
+      - OPENAI_BASE_URL=https://api.openai.com/v1
+      - OLLAMA_HOST=http://127.0.0.1:11434
+      - OLLAMA_MODEL=gemma2
+      - DEEPLX_ENDPOINT=http://localhost:1188/translate/
