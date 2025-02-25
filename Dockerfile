@@ -5,7 +5,8 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # 安装系统依赖和中文字体
-RUN apt-get update && apt-get install -y \
+RUN sed -i 's|http://deb.debian.org|https://mirrors.tuna.tsinghua.edu.cn|g' /etc/apt/sources.list && \
+    apt-get update && apt-get install -y \
     git \
     libgl1-mesa-glx \
     libglib2.0-0 \
@@ -23,13 +24,6 @@ RUN pip install pdf2zh flask pypdf
 
 # 设置环境变量
 ENV PYTHONUNBUFFERED=1
-
-ENV DEEPLX_ENDPOINT=http://localhost:1188/translate/
-ENV OLLAMA_HOST=http://127.0.0.1:11434
-ENV OLLAMA_MODEL=gemma2
-ENV OPENAI_BASE_URL=https://api.openai.com/v1
-ENV OPENAI_API_KEY=sk-proj-01234567890123456789012345678901
-ENV OPENAI_MODEL=gpt-4o
 
 # 创建翻译文件输出目录
 RUN mkdir -p /app/translated
