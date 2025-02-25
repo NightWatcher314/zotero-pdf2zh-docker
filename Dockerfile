@@ -5,8 +5,7 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # 安装系统依赖和中文字体
-RUN sed -i 's|http://deb.debian.org|https://mirrors.tuna.tsinghua.edu.cn|g' /etc/apt/sources.list && \
-    apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y \
     git \
     libgl1-mesa-glx \
     libglib2.0-0 \
