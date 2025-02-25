@@ -88,6 +88,7 @@ def translate_pdf(input_path, config):
             input_path,
             '--t', str(config.thread_num),
             '--output', config.translated_dir,
+            '--config', config_path,
             '--service', config.service
         ]
     else:

@@ -8,7 +8,6 @@ services:
     ports:
       - "8888:8888"
     volumes:
-      - ./fonts:/app/fonts
       - ./translated:/app/translated
     environment:
       - OPENAI_API_KEY=sk-proj-01234567890123456789012345678901
