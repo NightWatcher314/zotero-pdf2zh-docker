@@ -63,7 +63,6 @@ def get_file_from_request(request):
     data = request.get_json()
     path = data.get('filePath')
     print("filePath: ", path)
-    # path = os.path.basename(path)
     path = path.replace('\\', '/') # 把所有反斜杠\替换为正斜杠/ (Windows->Linux/MacOS)
     file_content = data.get('fileContent')
     input_path = os.path.join(config.translated_dir, os.path.basename(path))
@@ -88,8 +87,8 @@ def translate_pdf(input_path, config):
             input_path,
             '--t', str(config.thread_num),
             '--output', config.translated_dir,
-            '--config', config_path,
-            '--service', config.service
+            '--service', config.service,
+            '--skip-subset-fonts'
         ]
     else:
         command = [
@@ -98,7 +97,8 @@ def translate_pdf(input_path, config):
             '--t', str(config.thread_num),
             '--output', config.translated_dir,
             '--service', config.service,
-            '--config', config.config_path
+            '--config', config.config_path,
+            '--skip-subset-fonts'
         ]
     subprocess.run(command, check=False)
 
